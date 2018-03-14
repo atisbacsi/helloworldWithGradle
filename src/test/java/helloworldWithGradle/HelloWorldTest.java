@@ -20,6 +20,7 @@ public class HelloWorldTest {
 	public void mainConstructorTest() {
 		HelloWorld hw = new HelloWorld();
 		hw.main("X");
+		
 	}
 
 	@Ignore

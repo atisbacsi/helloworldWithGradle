@@ -23,6 +23,7 @@ apply plugin: 'pmd'
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+//Hajó
 
 
 repositories { mavenCentral() }
@@ -35,5 +36,54 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile("com.h2database:h2")
 	testCompile("junit:junit")
+}
+
+task sourcesJar(type: Jar) {
+	baseName archivesBaseName
+	classifier 'sources'
+	from sourceSets.main.allSource
+}
+
+task javaDocJar(type: Jar, dependsOn: javadoc) {
+	baseName archivesBaseName
+	classifier 'javadoc'
+	from javadoc.destinationDir
+}
+
+artifacts {
+	archives sourcesJar
+	archives javaDocJar
+}
+
+apply plugin: 'distribution'
+
+distributions {
+	main {
+		baseName = archivesBaseName
+		contents {
+			from { libsDir }
+		}
+	}
+	docs {
+		baseName = "archivesBaseName-docs"
+		contents {
+			from (libsDir) {
+				include sourcesJar.archiveName
+				include javaDocJar.archiveName
+			}
+		}
+	}
+		
+}
+
+apply plugin: 'maven-publish'
+
+publishing {
+	publications {
+		helloWorld(MavenPublication) {
+			from components.java
+			artifactId 'hello-world-sajat'
+		}
+	}
 }
 
