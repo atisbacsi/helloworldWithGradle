@@ -83,6 +83,7 @@ publishing {
 		helloWorld(MavenPublication) {
 			from components.java
 			artifactId 'hello-world-sajat'
+			
 		}
 	}
 }
