@@ -1,13 +1,24 @@
 buildscript {
 	ext { springBootVersion = '2.0.0.RELEASE' }
-	repositories { mavenCentral() }
-	dependencies { classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") }
+	repositories { mavenCentral() 
+		maven {
+		url "https://plugins.gradle.org/m2/"
+	}
+		
+	}
+	dependencies { 
+		classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2"
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")  }
 }
+
+apply plugin: "org.sonarqube"
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
+apply plugin: 'pmd'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -25,3 +36,4 @@ dependencies {
 	compile("com.h2database:h2")
 	testCompile("junit:junit")
 }
+

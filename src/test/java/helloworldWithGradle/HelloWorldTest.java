@@ -10,6 +10,17 @@ public class HelloWorldTest {
 	public void test1() {
 		Assert.assertTrue("Sikeres teszt", true);
 	}
+	
+	@Test
+	public void mainTest() {
+		HelloWorld.main("a", "b");
+	}
+
+	@Test
+	public void mainConstructorTest() {
+		HelloWorld hw = new HelloWorld();
+		hw.main("X");
+	}
 
 	@Ignore
 	@Test
