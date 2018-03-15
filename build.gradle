@@ -88,5 +88,11 @@ publishing {
 			artifact javaDocJar
 		}
 	}
+	repositories {
+		maven {
+			name 'myLocal'
+			url "file://$projectDir/../repo"
+		}
+	}
 }
 
